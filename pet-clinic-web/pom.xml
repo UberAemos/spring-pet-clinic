@@ -11,6 +11,11 @@
 
     <artifactId>pet-clinic-web</artifactId>
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
         <dependency>
             <artifactId>pet-clinic-data</artifactId>
             <groupId>com.uberaemos</groupId>
