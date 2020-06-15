@@ -16,14 +16,16 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final PetService petService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                      PetService petService, SpecialityService specialityService) {
+                      PetService petService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -49,6 +51,7 @@ public class DataLoader implements CommandLineRunner {
         radiology.setDescription("Radiology");
         radiology = specialityService.save(radiology);
 
+
         Owner john = new Owner();
         john.setFirstName("John");
         john.setLastName("Doe");
@@ -67,21 +70,27 @@ public class DataLoader implements CommandLineRunner {
         jane.setPets(new HashSet<>());
         ownerService.save(jane);
 
-        Pet someDog = new Pet();
-        someDog.setName("Fido");
-        someDog.setPetType(dog);
-        someDog.setOwner(john);
-        someDog.setBirthDate(LocalDate.now());
-        john.getPets().add(someDog);
-        petService.save(someDog);
+        Pet fido = new Pet();
+        fido.setName("Fido");
+        fido.setPetType(dog);
+        fido.setOwner(john);
+        fido.setBirthDate(LocalDate.now());
+        john.getPets().add(fido);
+        petService.save(fido);
 
-        Pet someCat = new Pet();
-        someCat.setName("Felix");
-        someCat.setPetType(cat);
-        someCat.setOwner(jane);
-        someCat.setBirthDate(LocalDate.now());
-        jane.getPets().add(someCat);
-        petService.save(someCat);
+        Pet felix = new Pet();
+        felix.setName("Felix");
+        felix.setPetType(cat);
+        felix.setOwner(jane);
+        felix.setBirthDate(LocalDate.now());
+        jane.getPets().add(felix);
+        petService.save(felix);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(felix);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Cat Visit");
+        visitService.save(catVisit);
 
         System.out.println("Loaded owners...");
 

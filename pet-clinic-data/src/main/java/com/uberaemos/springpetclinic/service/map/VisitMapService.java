@@ -2,11 +2,13 @@ package com.uberaemos.springpetclinic.service.map;
 
 import com.uberaemos.springpetclinic.model.Visit;
 import com.uberaemos.springpetclinic.service.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile("map")
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
     @Override
